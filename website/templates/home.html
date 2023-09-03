@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %}
+{% block content %} 
+<h2 align="center" class="font-weight-bold mt-4 mb-3">NOTING</h2>
+<h4 class="text-secondary">Hi {{current_user.first_name}}</h4>
+<h6 class="text-secondary">Here's your notes</h6>
+<ul class="list-group list-group-flush" id="notes">
+    {% for note in user.notes %}
+    <li class="list-group-item">
+        {{note.data}} 
+        <!-- note là biến từ file auth -->
+        <br/>
+        <span class="small text-secondary">{{note.date}}</span>
+        <!-- js here for deleting notes -->
+        <button type="button" class="close" Onclick="deleteNote({{ note.id }})">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    </li>
+    {% endfor %}
+</ul>
+<form method="POST">
+    <textarea name="note" id="note" class="form-control"></textarea>
+    <br/>
+    <div align = "center">
+        <button type="submit" class="btn btn-primary">Add Note</button>
+    </div>
+</form>
+{% endblock %}
